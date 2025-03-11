@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - EduLearn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .register-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        
+        .register-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-image {
+            background-image: url('https://img.freepik.com/free-vector/online-certification-illustration_23-2148575636.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100%;
+        }
+        
+        .register-form {
+            padding: 40px;
+        }
+        
+        .register-form h2 {
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            padding: 12px;
+            border-radius: 5px;
+        }
+        
+        .btn-register {
+            padding: 12px;
+            font-weight: 600;
+            width: 100%;
+        }
+        
+        .register-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .register-footer a {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .register-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .benefits-list {
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefits-list li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #dee2e6;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step.active .step-number {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .step.active .step-text {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container register-container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card register-card">
+                    <div class="row g-0">
+                        <div class="col-lg-5 d-none d-lg-block">
+                            <div class="register-image"></div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="register-form">
+                                <div class="text-center mb-4">
+                                    <a href="index.html" class="d-inline-block">
+                                        <i class="fas fa-graduation-cap fa-2x me-2 text-primary"></i>
+                                        <span class="h3 text-primary fw-bold">EduLearn</span>
+                                    </a>
+                                </div>
+                                
+                                <h2 class="text-center">Create Your Account</h2>
+                                <p class="text-center text-muted mb-4">Join thousands of students learning with EduLearn</p>
+                                
+                                <div class="form-steps">
+                                    <div class="step active">
+                                        <div class="step-number">1</div>
+                                        <div class="step-text">Account</div>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-number">2</div>
+                                        <div class="step-text">Profile</div>
+                                    </div>
+                                    <div class="step">
+                                        <div class="step-number">3</div>
+                                        <div class="step-text">Complete</div>
+                                    </div>
+                                </div>
+                                
+                                <form id="registerForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstName" class="form-label">First Name</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+                                        </div>
+                                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <small class="text-muted">Password must be at least 8 characters with letters, numbers, and special characters.</small>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="role" class="form-label">I want to join as</label>
+                                        <select class="form-select" id="role" required>
+                                            <option value="" selected disabled>Select your role</option>
+                                            <option value="student">Student - I want to learn</option>
+                                            <option value="instructor">Instructor - I want to teach</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-check mb-4">
+                                        <input class="form-check-input" type="checkbox" id="termsAgreement" required>
+                                        <label class="form-check-label" for="termsAgreement">
+                                            I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                                        </label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary btn-register">Create Account</button>
+                                    
+                                    <div class="register-footer">
+                                        <p>Already have an account? <a href="login.html">Sign In</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-md-4">
+                        <div class="card h-100 p-4">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-book-reader fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="text-center">Learn Anything</h4>
+                            <p class="text-center">Access over 200+ high-quality courses in various fields taught by industry experts.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 p-4">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-certificate fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="text-center">Get Certified</h4>
+                            <p class="text-center">Earn recognized certificates to showcase your skills and boost your career.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 p-4">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-users fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="text-center">Join Community</h4>
+                            <p class="text-center">Connect with fellow learners and instructors in our vibrant learning community.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="index.html" class="text-muted"><i class="fas fa-arrow-left me-2"></i>Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+            
+            // Form validation and submission
+            const registerForm = document.getElementById('registerForm');
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value.trim();
+                const confirmPassword = document.getElementById('confirmPassword').value.trim();
+                const role = document.getElementById('role').value;
+                const termsAgreed = document.getElementById('termsAgreement').checked;
+                
+                // Validation
+                if (firstName.length < 2 || lastName.length < 2) {
+                    showAlert('Please enter your full name', 'danger');
+                    return;
+                }
+                
+                if (!isValidEmail(email)) {
+                    document.getElementById('email').classList.add('is-invalid');
+                    return;
+                } else {
+                    document.getElementById('email').classList.remove('is-invalid');
+                }
+                
+                if (password.length < 8) {
+                    showAlert('Password must be at least 8 characters', 'danger');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showAlert('Passwords do not match', 'danger');
+                    return;
+                }
+                
+                if (!role) {
+                    showAlert('Please select your role', 'danger');
+                    return;
+                }
+                
+                if (!termsAgreed) {
+                    showAlert('You must agree to the Terms of Service and Privacy Policy', 'danger');
+                    return;
+                }
+                
+                // Register user
+                registerUser(firstName, lastName, email, password, role);
+            });
+            
+            function isValidEmail(email) {
+                return auth.isValidEmail(email);
+            }
+            
+            function showAlert(message, type) {
+                // Remove any existing alerts
+                const existingAlerts = document.querySelectorAll('.alert');
+                existingAlerts.forEach(alert => alert.remove());
+                
+                // Create new alert
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+                alertDiv.innerHTML = `
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                
+                // Insert alert before the form
+                registerForm.parentNode.insertBefore(alertDiv, registerForm);
+                
+                // Auto dismiss after 3 seconds
+                setTimeout(() => {
+                    alertDiv.classList.remove('show');
+                    setTimeout(() => alertDiv.remove(), 300);
+                }, 3000);
+            }
+            
+            async function registerUser(firstName, lastName, email, password, role) {
+                try {
+                    // Use the auth.register function from main.js
+                    const user = await auth.register(firstName, lastName, email, password, role);
+                    
+                    // Show success message
+                    showAlert('Registration successful! Redirecting to dashboard...', 'success');
+                    
+                    // Redirect to appropriate dashboard after a short delay
+                    setTimeout(() => {
+                        if (role === 'instructor') {
+                            window.location.href = 'instructor/dashboard.html';
+                        } else if (role === 'admin') {
+                            window.location.href = 'admin/dashboard.html';
+                        } else {
+                            // For student role, redirect to student dashboard
+                            window.location.href = 'student/dashboard.html';
+                        }
+                    }, 2000);
+                } catch (error) {
+                    // Show error message
+                    showAlert(error.message || 'Registration failed. Please try again.', 'danger');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

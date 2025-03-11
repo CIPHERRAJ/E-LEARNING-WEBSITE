@@ -1,0 +1,313 @@
+/* 
+* EduLearn - Professional E-Learning Platform
+* Main Stylesheet
+*/
+
+/* ===== GLOBAL STYLES ===== */
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #f72585;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --gray-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --body-font: 'Roboto', sans-serif;
+    --heading-font: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--dark-color);
+    overflow-x: hidden;
+    padding-top: 76px; /* Adjust for fixed navbar */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.section-title {
+    position: relative;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.section-subtitle {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    background-color: var(--light-color);
+    padding: 80px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.hero-section p {
+    color: var(--gray-color);
+    font-size: 1.1rem;
+}
+
+.hero-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== COURSES SECTION ===== */
+.course-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.course-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.course-rating {
+    font-weight: 600;
+}
+
+.course-price {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.hidden-courses {
+    display: none;
+}
+
+.badge {
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
+/* ===== STATISTICS SECTION ===== */
+.stat-item {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.counter {
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+/* ===== TESTIMONIALS SECTION ===== */
+.testimonial-card {
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--gray-color);
+}
+
+/* ===== CTA SECTION ===== */
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 80px 0;
+}
+
+/* ===== FOOTER ===== */
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a, .footer-contact li {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 36px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-contact li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-contact i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 992px) {
+    .hero-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+    
+    .hero-section .btn {
+        margin-bottom: 10px;
+    }
+    
+    .hero-section .d-flex {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 66px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .counter {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}

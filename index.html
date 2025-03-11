@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Professional E-Learning Platform</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2"></i>EduLearn
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2 px-4" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Transform Your Future with Online Learning</h1>
+                    <p class="lead mb-4">Access high-quality courses taught by industry experts. Learn at your own pace and achieve your career goals.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#courses" class="btn btn-primary btn-lg">Explore Courses</a>
+                        <a href="register.html" class="btn btn-outline-primary btn-lg">Sign Up</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="https://img.freepik.com/free-vector/online-learning-isometric-concept_1284-17947.jpg" alt="E-Learning Illustration" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Courses Section -->
+    <section id="courses" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Featured Courses</h2>
+                <p class="section-subtitle">Explore our most popular courses</p>
+            </div>
+            <div class="row g-4">
+                <!-- Course 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg" class="card-img-top" alt="Web Development">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">Web Development</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.8</span>
+                            </div>
+                            <h5 class="card-title">Complete Web Development Bootcamp</h5>
+                            <p class="card-text">Learn HTML, CSS, JavaScript, React, Node.js and more to become a full-stack web developer.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$89.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/data-analysis-concept-with-charts-graphs_23-2150441742.jpg" class="card-img-top" alt="Data Science">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Data Science</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.9</span>
+                            </div>
+                            <h5 class="card-title">Data Science and Machine Learning</h5>
+                            <p class="card-text">Master data analysis, visualization, machine learning algorithms and AI fundamentals.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$99.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/business-planning-concept-with-wooden-blocks-with-icons-it_23-2149371125.jpg" class="card-img-top" alt="Business">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-danger">Business</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.7</span>
+                            </div>
+                            <h5 class="card-title">Business Management and Leadership</h5>
+                            <p class="card-text">Develop essential management skills, leadership qualities and business strategies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$79.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 4 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/mobile-app-development-concept-with-modern-devices_23-2149373206.jpg" class="card-img-top" alt="Mobile Development">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-info">Mobile Development</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.8</span>
+                            </div>
+                            <h5 class="card-title">iOS & Android App Development</h5>
+                            <p class="card-text">Learn to build native mobile applications for both iOS and Android platforms using Swift and Kotlin.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$94.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 5 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/graphic-designer-workspace-with-tablet-color-swatches_23-2148271001.jpg" class="card-img-top" alt="Graphic Design">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-warning text-dark">Design</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.6</span>
+                            </div>
+                            <h5 class="card-title">Graphic Design Masterclass</h5>
+                            <p class="card-text">Master Adobe Photoshop, Illustrator, and InDesign to create stunning graphics, logos, and marketing materials.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$84.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 6 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/digital-marketing-with-icons-business-people_23-2150962134.jpg" class="card-img-top" alt="Digital Marketing">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-secondary">Marketing</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.7</span>
+                            </div>
+                            <h5 class="card-title">Digital Marketing Strategy</h5>
+                            <p class="card-text">Learn SEO, social media marketing, email campaigns, and PPC advertising to grow your online presence.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$74.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 7 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/cyber-security-concept-with-lock-icon-circuit-board-background-digital-data-protection-technology_90220-1351.jpg" class="card-img-top" alt="Cybersecurity">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-dark">Cybersecurity</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.9</span>
+                            </div>
+                            <h5 class="card-title">Cybersecurity Fundamentals</h5>
+                            <p class="card-text">Learn network security, ethical hacking, cryptography, and security best practices to protect digital assets.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$99.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 8 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/cloud-computing-concept-with-devices_23-2149739134.jpg" class="card-img-top" alt="Cloud Computing">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-info">Cloud Computing</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.8</span>
+                            </div>
+                            <h5 class="card-title">AWS & Azure Cloud Certification</h5>
+                            <p class="card-text">Master cloud platforms, infrastructure as code, serverless computing, and cloud security principles.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$89.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 9 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/ai-nuclear-energy-background-future-innovation-disruptive-technology_53876-129783.jpg" class="card-img-top" alt="Artificial Intelligence">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-danger">AI</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.9</span>
+                            </div>
+                            <h5 class="card-title">Artificial Intelligence & Deep Learning</h5>
+                            <p class="card-text">Explore neural networks, computer vision, natural language processing, and reinforcement learning.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$109.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 10 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/photographer-taking-photos-outdoors_23-2149020449.jpg" class="card-img-top" alt="Photography">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Photography</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.7</span>
+                            </div>
+                            <h5 class="card-title">Digital Photography Masterclass</h5>
+                            <p class="card-text">Learn composition, lighting, editing, and post-processing techniques to capture stunning photographs.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$69.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 11 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/3d-rendering-concept_23-2149429730.jpg" class="card-img-top" alt="3D Modeling">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-warning text-dark">3D Design</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.6</span>
+                            </div>
+                            <h5 class="card-title">3D Modeling and Animation</h5>
+                            <p class="card-text">Master Blender, Maya, and Cinema 4D to create stunning 3D models, animations, and visual effects.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$84.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 12 - Hidden -->
+                <div class="col-md-6 col-lg-4 hidden-courses">
+                    <div class="card course-card h-100">
+                        <img src="https://img.freepik.com/free-photo/gamer-playing-video-game-home_23-2149531735.jpg" class="card-img-top" alt="Game Development">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">Game Dev</span>
+                                <span class="course-rating"><i class="fas fa-star text-warning"></i> 4.8</span>
+                            </div>
+                            <h5 class="card-title">Unity Game Development</h5>
+                            <p class="card-text">Create 2D and 3D games using Unity engine, C# programming, game physics, and interactive gameplay mechanics.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span class="course-price">$94.99</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <button id="view-all-courses-btn" class="btn btn-primary">View All Courses</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                        <h3 class="counter">15,000+</h3>
+                        <p>Students</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <i class="fas fa-book fa-3x mb-3 text-primary"></i>
+                        <h3 class="counter">200+</h3>
+                        <p>Courses</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <i class="fas fa-chalkboard-teacher fa-3x mb-3 text-primary"></i>
+                        <h3 class="counter">50+</h3>
+                        <p>Instructors</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <i class="fas fa-certificate fa-3x mb-3 text-primary"></i>
+                        <h3 class="counter">10,000+</h3>
+                        <p>Certifications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">About EduLearn</h2>
+                <p class="section-subtitle">Learn more about our platform and mission</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://img.freepik.com/free-vector/team-concept-illustration_114360-678.jpg" alt="About Us" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Transforming Education Through Technology</h3>
+                    <p>EduLearn is a leading e-learning platform dedicated to providing high-quality education to students worldwide. Our mission is to make learning accessible, engaging, and effective for everyone.</p>
+                    <p>We partner with top instructors and industry experts to create courses that are comprehensive, up-to-date, and aligned with industry demands. Our interactive learning approach combines video lectures, hands-on projects, quizzes, and community support.</p>
+                    <div class="d-flex mt-4">
+                        <div class="me-4">
+                            <i class="fas fa-check-circle text-primary me-2"></i> Expert Instructors
+                        </div>
+                        <div class="me-4">
+                            <i class="fas fa-check-circle text-primary me-2"></i> Flexible Learning
+                        </div>
+                        <div>
+                            <i class="fas fa-check-circle text-primary me-2"></i> Lifetime Access
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">What Our Students Say</h2>
+                <p class="section-subtitle">Testimonials from our successful students</p>
+            </div>
+            <div class="row g-4">
+                <!-- Testimonial 1 -->
+                <div class="col-md-4">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Student" class="rounded-circle testimonial-img">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Sarah Johnson</h5>
+                                <p class="text-muted mb-0">Web Developer</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">
+                            <i class="fas fa-quote-left text-primary me-2"></i>
+                            The web development course completely transformed my career. I went from knowing nothing about coding to landing a job as a front-end developer in just 6 months!
+                        </p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="col-md-4">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Student" class="rounded-circle testimonial-img">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Michael Chen</h5>
+                                <p class="text-muted mb-0">Data Scientist</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">
+                            <i class="fas fa-quote-left text-primary me-2"></i>
+                            The data science course was comprehensive and practical. The instructors were experts in their field and the projects helped me build a strong portfolio.
+                        </p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="col-md-4">
+                    <div class="testimonial-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Student" class="rounded-circle testimonial-img">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Emily Rodriguez</h5>
+                                <p class="text-muted mb-0">Marketing Manager</p>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">
+                            <i class="fas fa-quote-left text-primary me-2"></i>
+                            The digital marketing courses helped me stay ahead in my field. The content is always up-to-date with the latest trends and strategies in the industry.
+                        </p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section py-5 text-white text-center">
+        <div class="container">
+            <h2 class="mb-4">Ready to Start Your Learning Journey?</h2>
+            <p class="lead mb-4">Join thousands of students who are already learning and growing with us.</p>
+            <a href="register.html" class="btn btn-light btn-lg">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with our support team</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h4 class="mb-4">Send Us a Message</h4>
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="nameInput" placeholder="Your Name">
+                                            <label for="nameInput">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="emailInput" placeholder="Your Email">
+                                            <label for="emailInput">Your Email</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="subjectInput" placeholder="Subject">
+                                    <label for="subjectInput">Subject</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="messageInput" style="height: 150px" placeholder="Your Message"></textarea>
+                                    <label for="messageInput">Your Message</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h4 class="mb-4">Contact Information</h4>
+                            <div class="d-flex mb-4">
+                                <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Our Location</h5>
+                                    <p class="mb-0 text-muted">123 Education St, Learning City, 10001</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Phone Number</h5>
+                                    <p class="mb-0 text-muted">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Email Address</h5>
+                                    <p class="mb-0 text-muted">info@edulearn.com</p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Working Hours</h5>
+                                    <p class="mb-0 text-muted">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="mb-4"><i class="fas fa-graduation-cap me-2"></i>EduLearn</h4>
+                    <p>EduLearn is a professional e-learning platform dedicated to providing high-quality education to students worldwide. Our mission is to make learning accessible, engaging, and effective for everyone.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="#courses" class="text-white">Courses</a></li>
+                        <li><a href="#about" class="text-white">About Us</a></li>
+                        <li><a href="#contact" class="text-white">Contact</a></li>
+                        <li><a href="login.html" class="text-white">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-4">Categories</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#" class="text-white">Web Development</a></li>
+                        <li><a href="#" class="text-white">Data Science</a></li>
+                        <li><a href="#" class="text-white">Business</a></li>
+                        <li><a href="#" class="text-white">Design</a></li>
+                        <li><a href="#" class="text-white">Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <ul class="list-unstyled footer-contact">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Education St, Learning City, 10001</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@edulearn.com</li>
+                    </ul>
+                    <form class="mt-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Subscribe to newsletter">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-md-0">© 2023 EduLearn. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white me-3">Terms of Service</a>
+                    <a href="#" class="text-white">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

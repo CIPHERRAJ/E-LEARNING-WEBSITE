@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EduLearn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            padding-top: 0;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 20px 20px 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .content-header h1 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .user-dropdown {
+            position: relative;
+        }
+        
+        .user-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .user-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .user-dropdown-menu.show {
+            display: block;
+        }
+        
+        .user-dropdown-item {
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        
+        .user-dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .user-dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card {
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .stat-icon.students {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .stat-icon.courses {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+        
+        .stat-icon.instructors {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .stat-icon.revenue {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .stat-info h3 {
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .stat-info p {
+            margin: 0;
+            color: var(--gray-color);
+        }
+        
+        /* Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .dashboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .dashboard-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            padding: 15px;
+        }
+        
+        .dashboard-table td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+        
+        .dashboard-table tbody tr {
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .dashboard-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .course-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .instructor-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .instructor-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .badge-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+        
+        .badge-active {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+        
+        .badge-pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .badge-draft {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: var(--gray-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button.edit {
+            background-color: var(--primary-color);
+        }
+        
+        .action-button.delete {
+            background-color: var(--danger-color);
+        }
+        
+        .action-button.view {
+            background-color: var(--success-color);
+        }
+        
+        .action-button:hover {
+            opacity: 0.8;
+        }
+        
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header h3, .menu-category, .menu-item span {
+                display: none;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stat-cards .col-md-3 {
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Toggle Button for Mobile */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-graduation-cap me-2"></i>EduLearn</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="menu-category">Content Management</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Instructors</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certificates</span>
+                </a>
+                
+                <div class="menu-category">Finance</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Payments</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-tags"></i>
+                    <span>Coupons</span>
+                </a>
+                
+                <div class="menu-category">Settings</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>General</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-palette"></i>
+                    <span>Appearance</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="#" class="menu-item logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Toggle Button for Mobile -->
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Content Header -->
+            <div class="content-header">
+                <h1>Admin Dashboard</h1>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-dropdown-toggle">
+                        <div class="user-avatar">A</div>
+                        <div>
+                            <div class="fw-bold" id="userName">Admin User</div>
+                            <div class="text-muted small" id="userEmail">admin@edulearn.com</div>
+                        </div>
+                        <i class="fas fa-chevron-down ms-2"></i>
+                    </div>
+                    <div class="user-dropdown-menu" id="userDropdownMenu">
+                        <a href="#" class="user-dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="#" class="user-dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="user-dropdown-item logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Cards -->
+            <div class="row stat-cards g-3 mb-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon students">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>15,245</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon courses">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>245</h3>
+                            <p>Total Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon instructors">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>65</h3>
+                            <p>Total Instructors</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon revenue">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>$125,430</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Courses -->
+            <div class="dashboard-card mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Recent Courses</h5>
+                    <a href="#" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Instructor</th>
+                                <th>Category</th>
+                                <th>Students</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="course-info">
+                                        <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg" alt="Course" class="course-image">
+                                        <div>
+                                            <div class="fw-bold">Complete Web Development Bootcamp</div>
+                                            <div class="text-muted small">Last updated: 2 days ago</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Instructor" class="instructor-avatar">
+                                        <div>John Smith</div>
+                                    </div>
+                                </td>
+                                <td>Web Development</td>
+                                <td>1,245</td>
+                                <td>$89.99</td>
+                                <td><span class="badge-status badge-active">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <div class="action-button delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="course-info">
+                                        <img src="https://img.freepik.com/free-photo/data-analysis-concept-with-charts-graphs_23-2150441742.jpg" alt="Course" class="course-image">
+                                        <div>
+                                            <div class="fw-bold">Data Science and Machine Learning</div>
+                                            <div class="text-muted small">Last updated: 5 days ago</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Instructor" class="instructor-avatar">
+                                        <div>Sarah Johnson</div>
+                                    </div>
+                                </td>
+                                <td>Data Science</td>
+                                <td>987</td>
+                                <td>$99.99</td>
+                                <td><span class="badge-status badge-active">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <div class="action-button delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="course-info">
+                                        <img src="https://img.freepik.com/free-photo/business-planning-concept-with-wooden-blocks-with-icons-it_23-2149371125.jpg" alt="Course" class="course-image">
+                                        <div>
+                                            <div class="fw-bold">Business Management and Leadership</div>
+                                            <div class="text-muted small">Last updated: 1 week ago</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Instructor" class="instructor-avatar">
+                                        <div>Michael Chen</div>
+                                    </div>
+                                </td>
+                                <td>Business</td>
+                                <td>756</td>
+                                <td>$79.99</td>
+                                <td><span class="badge-status badge-pending">Pending</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <div class="action-button delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="course-info">
+                                        <img src="https://img.freepik.com/free-photo/graphic-design-banner_23-2150170926.jpg" alt="Course" class="course-image">
+                                        <div>
+                                            <div class="fw-bold">Graphic Design Masterclass</div>
+                                            <div class="text-muted small">Last updated: 2 weeks ago</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Instructor" class="instructor-avatar">
+                                        <div>Emily Rodriguez</div>
+                                    </div>
+                                </td>
+                                <td>Design</td>
+                                <td>543</td>
+                                <td>$69.99</td>
+                                <td><span class="badge-status badge-draft">Draft</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                        <div class="action-button delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Analytics Section -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title mb-0">Revenue Overview</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="revenueDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    This Year
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="revenueDropdown">
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Quarter</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">All Time</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title mb-0">Course Categories</h5>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Students -->
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Recent Students</h5>
+                    <a href="#" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Email</th>
+                                <th>Enrolled Courses</th>
+                                <th>Joined Date</th>
+                                <th>Progress</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Student" class="instructor-avatar">
+                                        <div>Jennifer Wilson</div>
+                                    </div>
+                                </td>
+                                <td>jennifer.w@example.com</td>
+                                <td>3</td>
+                                <td>May 12, 2023</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Student" class="instructor-avatar">
+                                        <div>Robert Johnson</div>
+                                    </div>
+                                </td>
+                                <td>robert.j@example.com</td>
+                                <td>2</td>
+                                <td>May 15, 2023</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Student" class="instructor-avatar">
+                                        <div>Amanda Lee</div>
+                                    </div>
+                                </td>
+                                <td>amanda.l@example.com</td>
+                                <td>5</td>
+                                <td>May 18, 2023</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Registered Users -->
+            <div class="dashboard-card mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Registered Users</h5>
+                    <button class="btn btn-sm btn-primary" id="refreshUsersBtn">Refresh List</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="dashboard-table" id="registeredUsersTable">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Joined Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="instructor-avatar">
+                                        <div>Michael Brown</div>
+                                    </div>
+                                </td>
+                                <td>michael.b@example.com</td>
+                                <td><span class="badge bg-info">Student</span></td>
+                                <td>May 5, 2023</td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary promote-btn" data-user-id="user1" data-user-name="Michael Brown" data-user-email="michael.b@example.com">
+                                            Promote to Instructor
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User" class="instructor-avatar">
+                                        <div>Sophia Garcia</div>
+                                    </div>
+                                </td>
+                                <td>sophia.g@example.com</td>
+                                <td><span class="badge bg-info">Student</span></td>
+                                <td>May 8, 2023</td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary promote-btn" data-user-id="user2" data-user-name="Sophia Garcia" data-user-email="sophia.g@example.com">
+                                            Promote to Instructor
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="instructor-info">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="instructor-avatar">
+                                        <div>David Wilson</div>
+                                    </div>
+                                </td>
+                                <td>david.w@example.com</td>
+                                <td><span class="badge bg-warning text-dark">Instructor</span></td>
+                                <td>April 15, 2023</td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <span class="text-muted">Already an instructor</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in and is admin
+            const checkAuth = () => {
+                const user = JSON.parse(localStorage.getItem('edulearn_user') || '{}');
+                if (!user.id || user.role !== 'admin') {
+                    // Redirect to login page if not admin
+                    window.location.href = '../login.html';
+                } else {
+                    // Update user info in the UI
+                    document.getElementById('userName').textContent = user.name;
+                    document.getElementById('userEmail').textContent = user.email;
+                    document.querySelector('.user-avatar').textContent = user.name.charAt(0);
+                }
+            };
+            
+            // Call auth check
+            checkAuth();
+            
+            // User dropdown toggle
+            const userDropdown = document.getElementById('userDropdown');
+            const userDropdownMenu = document.getElementById('userDropdownMenu');
+            
+            userDropdown.addEventListener('click', function() {
+                userDropdownMenu.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userDropdown.contains(e.target)) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            });
+            
+            // Sidebar toggle for mobile
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+            
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [12500, 15000, 18000, 16500, 21000, 22500, 25000, 23000, 27000, 28500, 30000, 32000],
+                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        borderColor: '#4361ee',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Category Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            const categoryChart = new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Web Development', 'Data Science', 'Business', 'Design', 'Marketing'],
+                    datasets: [{
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: [
+                            '#4361ee',
+                            '#3f37c9',
+                            '#f72585',
+                            '#4cc9f0',
+                            '#560bad'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+            
+            // Action buttons functionality
+            const actionButtons = document.querySelectorAll('.action-button');
+            
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.classList.contains('view') ? 'view' : 
+                                  this.classList.contains('edit') ? 'edit' : 'delete';
+                    const itemType = this.closest('table').querySelector('th').textContent.toLowerCase().includes('course') ? 'course' : 'student';
+                    const itemName = this.closest('tr').querySelector('.fw-bold')?.textContent || 
+                                    this.closest('tr').querySelector('.instructor-info div').textContent;
+                    
+                    if (action === 'delete') {
+                        if (confirm(`Are you sure you want to delete this ${itemType}: ${itemName}?`)) {
+                            // In a real app, this would call an API to delete the item
+                            alert(`${itemType} deleted successfully!`);
+                            // Then remove the row from the table
+                            this.closest('tr').remove();
+                        }
+                    } else {
+                        alert(`${action} ${itemType}: ${itemName}`);
+                        // In a real app, this would navigate to the edit or view page
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

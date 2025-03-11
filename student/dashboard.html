@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - EduLearn</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            padding-top: 0;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 20px 20px 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            width: calc(100% - 250px);
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .content-header h1 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .user-dropdown {
+            position: relative;
+        }
+        
+        .user-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .user-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .user-dropdown-menu.show {
+            display: block;
+        }
+        
+        .user-dropdown-item {
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        
+        .user-dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .user-dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .stat-icon.courses {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .stat-icon.progress {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+        
+        .stat-icon.assignments {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .stat-icon.certificates {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .stat-info h3 {
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .stat-info p {
+            margin: 0;
+            color: var(--gray-color);
+        }
+        
+        /* Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+            width: 100%;
+        }
+        
+        .dashboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 650px;
+        }
+        
+        .dashboard-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            padding: 15px;
+            white-space: nowrap;
+        }
+        
+        .dashboard-table td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+        
+        .dashboard-table tbody tr {
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .dashboard-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .course-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .badge-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        .badge-completed {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+        
+        .badge-in-progress {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .badge-not-started {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: var(--gray-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button.view {
+            background-color: var(--primary-color);
+        }
+        
+        .action-button.download {
+            background-color: var(--success-color);
+        }
+        
+        .action-button:hover {
+            opacity: 0.8;
+        }
+        
+        /* Course Cards */
+        .course-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-card-img {
+            height: 160px;
+            object-fit: cover;
+            width: 100%;
+            display: block;
+        }
+        
+        .course-card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 48px;
+        }
+        
+        .course-card-instructor {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .instructor-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .course-card-progress {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .course-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f1f1f1;
+            margin-top: auto;
+        }
+        
+        .course-card-rating {
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-card-rating i {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+        
+        /* Achievement Badges */
+        .achievement-badge {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .achievement-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badge-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2rem;
+        }
+        
+        .badge-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .badge-description {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar-header h3, .menu-category, .menu-item span {
+                display: none;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stat-cards .col-md-3 {
+                margin-bottom: 15px;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .content-header .user-dropdown {
+                margin-top: 15px;
+                align-self: flex-end;
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+        }
+        
+        /* Toggle Button for Mobile */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                transform: translateX(-100%);
+                box-shadow: none;
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 15px;
+            }
+            
+            .sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .dashboard-card {
+                padding: 15px;
+            }
+            
+            .chart-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-graduation-cap me-2"></i>EduLearn</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="menu-category">Learning</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>My Courses</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-search"></i>
+                    <span>Browse Courses</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Wishlist</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certificates</span>
+                </a>
+                
+                <div class="menu-category">Assignments</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-tasks"></i>
+                    <span>Homework</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Quizzes</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>My Progress</span>
+                </a>
+                
+                <div class="menu-category">Community</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Discussions</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Study Groups</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+                
+                <div class="menu-category">Account</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="#" class="menu-item logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Toggle Button for Mobile -->
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Content Header -->
+            <div class="content-header">
+                <h1>Student Dashboard</h1>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-dropdown-toggle">
+                        <div class="user-avatar">S</div>
+                        <div>
+                            <div class="fw-bold" id="userName">Student User</div>
+                            <div class="text-muted small" id="userEmail">student@example.com</div>
+                        </div>
+                        <i class="fas fa-chevron-down ms-2"></i>
+                    </div>
+                    <div class="user-dropdown-menu" id="userDropdownMenu">
+                        <a href="#" class="user-dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="#" class="user-dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="user-dropdown-item logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Welcome Message -->
+            <div class="dashboard-card mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="mb-3">Welcome back, <span id="welcomeName">Student</span>!</h2>
+                        <p class="text-muted">Continue your learning journey and track your progress. You have upcoming assignments and quizzes that need your attention.</p>
+                        <a href="#" class="btn btn-primary mt-2">Resume Learning</a>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <img src="https://img.freepik.com/free-vector/online-learning-concept-illustration_114360-4735.jpg" alt="Learning" class="img-fluid" style="max-height: 200px;">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Cards -->
+            <div class="row stat-cards g-3 mb-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon courses">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Enrolled Courses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon progress">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>68%</h3>
+                            <p>Overall Progress</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon assignments">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Pending Assignments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="dashboard-card stat-card">
+                        <div class="stat-icon certificates">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>Certificates Earned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Continue Learning -->
+            <div class="dashboard-card mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Continue Learning</h5>
+                    <a href="#" class="btn btn-sm btn-primary">View All Courses</a>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="course-card">
+                            <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg" alt="Course" class="img-fluid course-card-img w-100">
+                            <div class="course-card-body">
+                                <h5 class="course-card-title">Complete Web Development Bootcamp</h5>
+                                <div class="course-card-instructor">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Instructor" class="instructor-avatar">
+                                    <span class="text-muted">John Smith</span>
+                                </div>
+                                <div class="course-card-progress">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small">Progress</span>
+                                        <span class="small text-primary fw-bold">75%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="course-card-footer">
+                                    <div class="course-card-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-primary">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="course-card">
+                            <img src="https://img.freepik.com/free-photo/javascript-programming-code-abstract-technology-background_272306-155.jpg" alt="Course" class="img-fluid course-card-img w-100">
+                            <div class="course-card-body">
+                                <h5 class="course-card-title">Advanced JavaScript Concepts</h5>
+                                <div class="course-card-instructor">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Instructor" class="instructor-avatar">
+                                    <span class="text-muted">Sarah Johnson</span>
+                                </div>
+                                <div class="course-card-progress">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small">Progress</span>
+                                        <span class="small text-primary fw-bold">45%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="course-card-footer">
+                                    <div class="course-card-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-primary">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="course-card">
+                            <img src="https://img.freepik.com/free-photo/html-system-website-concept_23-2150376770.jpg" alt="Course" class="img-fluid course-card-img w-100">
+                            <div class="course-card-body">
+                                <h5 class="course-card-title">HTML & CSS Masterclass</h5>
+                                <div class="course-card-instructor">
+                                    <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Instructor" class="instructor-avatar">
+                                    <span class="text-muted">Michael Brown</span>
+                                </div>
+                                <div class="course-card-progress">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="small">Progress</span>
+                                        <span class="small text-primary fw-bold">90%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="course-card-footer">
+                                    <div class="course-card-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>4.7</span>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-primary">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upcoming Assignments -->
+            <div class="dashboard-card mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Upcoming Assignments</h5>
+                    <a href="#" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Assignment</th>
+                                <th>Course</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">JavaScript Final Project</div>
+                                    <div class="text-muted small">Build a complete web application</div>
+                                </td>
+                                <td>Advanced JavaScript Concepts</td>
+                                <td>
+                                    <div class="text-danger fw-bold">Tomorrow, 11:59 PM</div>
+                                </td>
+                                <td><span class="badge-status badge-in-progress">In Progress</span></td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-primary">Continue</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">Responsive Design Challenge</div>
+                                    <div class="text-muted small">Create a responsive website</div>
+                                </td>
+                                <td>HTML & CSS Masterclass</td>
+                                <td>
+                                    <div>May 25, 2023</div>
+                                </td>
+                                <td><span class="badge-status badge-not-started">Not Started</span></td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Start</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">API Integration Quiz</div>
+                                    <div class="text-muted small">Test your knowledge of RESTful APIs</div>
+                                </td>
+                                <td>Complete Web Development Bootcamp</td>
+                                <td>
+                                    <div>May 30, 2023</div>
+                                </td>
+                                <td><span class="badge-status badge-not-started">Not Started</span></td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Start</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Learning Progress -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title mb-0">Learning Progress</h5>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="progressDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Last 6 Months
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="progressDropdown">
+                                    <li><a class="dropdown-item" href="#">Last Month</a></li>
+                                    <li><a class="dropdown-item" href="#">Last 3 Months</a></li>
+                                    <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+                                    <li><a class="dropdown-item" href="#">Last Year</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="learningProgressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title mb-0">Time Spent</h5>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="timeSpentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Achievements -->
+            <div class="dashboard-card mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Your Achievements</h5>
+                    <a href="#" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="achievement-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h5 class="badge-title">Fast Learner</h5>
+                            <p class="badge-description">Completed 5 courses in record time</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="achievement-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h5 class="badge-title">7-Day Streak</h5>
+                            <p class="badge-description">Studied for 7 consecutive days</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="achievement-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5 class="badge-title">Perfect Score</h5>
+                            <p class="badge-description">Scored 100% on a quiz</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="achievement-badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h5 class="badge-title">Active Participant</h5>
+                            <p class="badge-description">Posted 10+ comments in discussions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certificates -->
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title mb-0">Your Certificates</h5>
+                    <a href="#" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Certificate</th>
+                                <th>Course</th>
+                                <th>Issued Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">Web Development Fundamentals</div>
+                                    <div class="text-muted small">Certificate of Completion</div>
+                                </td>
+                                <td>Complete Web Development Bootcamp</td>
+                                <td>April 15, 2023</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button download" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">HTML & CSS Mastery</div>
+                                    <div class="text-muted small">Certificate of Completion</div>
+                                </td>
+                                <td>HTML & CSS Masterclass</td>
+                                <td>March 22, 2023</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <div class="action-button view" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <div class="action-button download" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/student.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in and is student
+            const checkAuth = () => {
+                const user = JSON.parse(localStorage.getItem('edulearn_user') || '{}');
+                if (!user.id || user.role !== 'student') {
+                    // Redirect to login page if not student
+                    window.location.href = '../login.html';
+                } else {
+                    // Update user info in the UI
+                    document.getElementById('userName').textContent = user.name;
+                    document.getElementById('userEmail').textContent = user.email;
+                    document.getElementById('welcomeName').textContent = user.name.split(' ')[0];
+                    document.querySelector('.user-avatar').textContent = user.name.charAt(0);
+                }
+            };
+            
+            // Call auth check
+            checkAuth();
+            
+            // User dropdown toggle
+            const userDropdown = document.getElementById('userDropdown');
+            const userDropdownMenu = document.getElementById('userDropdownMenu');
+            
+            userDropdown.addEventListener('click', function() {
+                userDropdownMenu.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userDropdown.contains(e.target)) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            });
+            
+            // Sidebar toggle for mobile
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+            
+            // Learning Progress Chart
+            const learningProgressCtx = document.getElementById('learningProgressChart').getContext('2d');
+            const learningProgressChart = new Chart(learningProgressCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Hours Studied',
+                            data: [10, 15, 12, 25, 20, 30],
+                            borderColor: '#4361ee',
+                            backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Assignments Completed',
+                            data: [5, 7, 6, 10, 8, 12],
+                            borderColor: '#f72585',
+                            backgroundColor: 'rgba(247, 37, 133, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Time Spent Chart
+            const timeSpentCtx = document.getElementById('timeSpentChart').getContext('2d');
+            const timeSpentChart = new Chart(timeSpentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Web Development', 'JavaScript', 'HTML & CSS', 'React', 'Other'],
+                    datasets: [{
+                        data: [35, 25, 20, 15, 5],
+                        backgroundColor: [
+                            '#4361ee',
+                            '#3f37c9',
+                            '#f72585',
+                            '#4cc9f0',
+                            '#560bad'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
